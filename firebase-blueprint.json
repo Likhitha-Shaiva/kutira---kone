@@ -1,0 +1,79 @@
+{
+  "entities": {
+    "Listing": {
+      "title": "Fabric Listing",
+      "description": "A piece of fabric available for swap or purchase.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "material": { "type": "string", "enum": ["Cotton", "Silk", "Wool", "Linen", "Polyester", "Denim", "Other"] },
+        "color": { "type": "string" },
+        "size": { "type": "string", "description": "Approximate size e.g., 0.5 meters" },
+        "imageUrl": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "ownerName": { "type": "string" },
+        "location": {
+          "type": "object",
+          "properties": {
+            "city": { "type": "string" },
+            "lat": { "type": "number" },
+            "lng": { "type": "number" }
+          }
+        },
+        "status": { "type": "string", "enum": ["available", "reserved", "exchanged"] },
+        "type": { "type": "string", "enum": ["swap", "buy", "free"] },
+        "price": { "type": "number", "description": "Only relevant if type is buy" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "material", "ownerId", "status", "type", "createdAt"]
+    },
+    "SwapRequest": {
+      "title": "Swap Request",
+      "description": "A request to trade one fabric for another.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "listingId": { "type": "string" },
+        "ownerId": { "type": "string", "description": "Owner of the listed item" },
+        "requesterId": { "type": "string" },
+        "requesterName": { "type": "string" },
+        "proposedListingId": { "type": "string", "description": "Item offered in exchange" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "accepted", "declined"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["listingId", "ownerId", "requesterId", "status", "createdAt"]
+    },
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Public profile of a user.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "bio": { "type": "string" },
+        "city": { "type": "string" }
+      },
+      "required": ["id", "displayName", "email"]
+    }
+  },
+  "firestore": {
+    "/listings/{listingId}": {
+      "schema": "Listing",
+      "description": "Fabric scraps available for trade or sale."
+    },
+    "/listings/{listingId}/swapRequests/{requestId}": {
+      "schema": "SwapRequest",
+      "description": "Requests made to swap for a specific listing."
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile data."
+    }
+  }
+}

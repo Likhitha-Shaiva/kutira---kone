@@ -1,0 +1,6 @@
+{
+  "name": "Kutira-Kone",
+  "description": "A hyper-local fabric marketplace promoting a circular economy. Tailors can list fabric scraps and artisans can buy or swap them for upcycling projects.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["Firebase", "Gemini AI"]
+}
