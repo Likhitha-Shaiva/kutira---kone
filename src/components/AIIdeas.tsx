@@ -20,82 +20,91 @@ export default function AIIdeas() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-12">
-      <div className="text-center mb-12">
-        <div className="inline-flex items-center justify-center p-3 bg-orange-100 text-orange-600 rounded-2xl mb-4">
-          <Sparkles size={32} />
-        </div>
-        <h1 className="font-serif text-4xl font-bold text-[#1a1a1a] mb-4">AI Design Studio</h1>
-        <p className="text-[#5A5A40]/70 max-w-xl mx-auto">
-          Not sure what to do with your leftovers? Tell us what you have, and our AI will suggest creative upcycling projects.
-        </p>
-      </div>
-
-      <form onSubmit={handleGenerate} className="bg-white p-8 rounded-[32px] shadow-sm border border-[#5A5A40]/10 mb-12 flex flex-wrap gap-6 items-end justify-center">
-        <div className="flex-1 min-w-[200px]">
-          <label className="block text-xs font-bold uppercase tracking-wider text-[#5A5A40]/60 mb-2">Material Type</label>
-          <select 
-            value={material}
-            onChange={(e) => setMaterial(e.target.value)}
-            className="w-full bg-[#f5f5f0] border-none rounded-xl focus:ring-2 focus:ring-[#5A5A40] px-4 py-3"
-          >
-            {materials.map(m => <option key={m} value={m}>{m}</option>)}
-          </select>
-        </div>
-        <div className="flex-1 min-w-[200px]">
-          <label className="block text-xs font-bold uppercase tracking-wider text-[#5A5A40]/60 mb-2">Approximate Size</label>
-          <input 
-            type="text"
-            value={size}
-            onChange={(e) => setSize(e.target.value)}
-            placeholder="e.g. 10cm x 10cm"
-            className="w-full bg-[#f5f5f0] border-none rounded-xl focus:ring-2 focus:ring-[#5A5A40] px-4 py-3"
-          />
-        </div>
-        <button 
-          disabled={loading}
-          className="bg-[#5A5A40] text-white px-8 py-3 rounded-full font-bold hover:bg-[#4A4A30] transition-all disabled:opacity-50 flex items-center gap-2"
-        >
-          {loading ? <Loader2 className="animate-spin" size={20} /> : <Sparkles size={20} />}
-          Generate Ideas
-        </button>
-      </form>
-
-      <div className="grid gap-8">
-        {ideas.map((idea, idx) => (
-          <motion.div 
-            key={idx}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: idx * 0.1 }}
-            className="bg-white p-8 rounded-[32px] shadow-sm border border-[#5A5A40]/10 flex gap-8 items-start relative overflow-hidden"
-          >
-            <div className="absolute top-0 right-0 w-24 h-24 bg-orange-50 rounded-bl-full -mr-4 -mt-4" />
-            <div className="bg-orange-100 text-orange-600 p-4 rounded-2xl shrink-0">
-              <Scissors size={24} />
-            </div>
-            <div>
-              <h3 className="font-serif text-2xl font-bold mb-2">{idea.title}</h3>
-              <p className="text-[#5A5A40]/80 mb-6 leading-relaxed italic">{idea.description}</p>
-              
-              <div className="space-y-3">
-                {idea.steps.map((step: string, i: number) => (
-                  <div key={i} className="flex gap-3 text-sm text-[#5A5A40]/70">
-                    <span className="font-bold text-[#5A5A40] shrink-0">{i + 1}.</span>
-                    <span>{step}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        ))}
-
-        {!loading && ideas.length === 0 && (
-          <div className="text-center py-20 bg-gray-50 rounded-[32px] border-2 border-dashed border-gray-200">
-            <Info className="mx-auto text-gray-400 mb-4" size={48} />
-            <p className="text-gray-500 italic">Enter your fabric details above to get inspiration.</p>
+    <div className="flex-1 flex flex-col min-h-0 bg-slate-50">
+      <section className="bg-white border-b border-border px-6 py-12 shrink-0">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-indigo-50 text-primary border border-indigo-100 rounded-lg mb-4">
+            <Sparkles size={24} />
           </div>
-        )}
+          <h1 className="text-3xl font-bold text-text-main mb-2">Generative Design Studio</h1>
+          <p className="text-sm text-text-muted max-w-lg mx-auto font-medium lowercase tracking-tight">
+            Advanced heuristic engine for circular textile upcycling. Input scrap parameters to compute creative secondary use-cases.
+          </p>
+        </div>
+      </section>
+
+      <div className="flex-1 overflow-y-auto p-6">
+        <div className="max-w-4xl mx-auto space-y-8 pb-12">
+          <form onSubmit={handleGenerate} className="bg-panel p-6 rounded-lg border border-border shadow-sm flex flex-wrap gap-4 items-end">
+            <div className="flex-1 min-w-[180px]">
+              <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Input_Material</label>
+              <select 
+                value={material}
+                onChange={(e) => setMaterial(e.target.value)}
+                className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-sm font-mono focus:outline-none focus:ring-1 focus:ring-primary"
+              >
+                {materials.map(m => <option key={m} value={m}>{m}</option>)}
+              </select>
+            </div>
+            <div className="flex-1 min-w-[180px]">
+              <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Scale_Descriptor</label>
+              <input 
+                type="text"
+                value={size}
+                onChange={(e) => setSize(e.target.value)}
+                placeholder="e.g. 10cm x 10cm"
+                className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-sm font-mono focus:outline-none focus:ring-1 focus:ring-primary"
+              />
+            </div>
+            <button 
+              disabled={loading}
+              className="px-6 py-2 bg-primary text-white rounded text-sm font-bold hover:bg-primary-hover transition-all disabled:opacity-50 flex items-center gap-2 shadow-sm"
+            >
+              {loading ? <Loader2 className="animate-spin" size={16} /> : <Sparkles size={16} />}
+              Compute Ideas
+            </button>
+          </form>
+
+          <div className="grid gap-4">
+            {ideas.map((idea, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                className="bg-panel border border-border rounded-lg shadow-sm flex overflow-hidden"
+              >
+                <div className="w-2 bg-indigo-500 shrink-0"></div>
+                <div className="p-6 flex gap-6">
+                  <div className="bg-slate-50 text-slate-400 p-3 rounded border border-slate-200 self-start">
+                    <Scissors size={20} />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-text-main mb-1 uppercase tracking-tight">{idea.title}</h3>
+                    <p className="text-sm text-text-muted mb-4 font-mono leading-relaxed">{idea.description}</p>
+                    
+                    <div className="space-y-2">
+                       <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Procedural Steps</span>
+                       {idea.steps.map((step: string, i: number) => (
+                        <div key={i} className="flex gap-3 text-[11px] text-slate-600 font-mono">
+                          <span className="text-primary font-bold">0{i + 1}</span>
+                          <span>{step}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+
+            {!loading && ideas.length === 0 && (
+              <div className="text-center py-20 bg-white rounded-lg border-2 border-dashed border-slate-200">
+                <Info className="mx-auto text-slate-300 mb-2" size={32} />
+                <p className="text-slate-400 text-xs font-mono uppercase tracking-tighter">Enter parameters to begin heuristic computation.</p>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,14 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Cormorant Garamond", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* High Density Theme Custom Colors */
+  --color-primary: #4f46e5; /* indigo-600 */
+  --color-primary-hover: #4338ca; /* indigo-700 */
+  --color-surface: #f8fafc; /* slate-50 */
+  --color-panel: #ffffff; /* white */
+  --color-border: #e2e8f0; /* slate-200 */
+  --color-text-main: #0f172a; /* slate-900 */
+  --color-text-muted: #64748b; /* slate-500 */
+  --color-sidebar: #f1f5f9; /* slate-100 */
+  --color-status-bar: #1e293b; /* slate-800 */
 }
 
 @layer base {
   body {
-    @apply bg-[#f5f5f0] text-[#1a1a1a] scroll-smooth;
+    @apply bg-surface text-text-main font-sans scroll-smooth;
   }
 }
 
@@ -20,3 +31,11 @@
   scrollbar-width: none;
 }
 
+/* Dense Layout Utilities */
+.panel-border {
+  @apply border border-border;
+}
+
+.stats-card {
+  @apply bg-surface rounded border border-border p-3;
+}

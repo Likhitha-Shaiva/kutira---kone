@@ -8,50 +8,53 @@ export default function Header() {
   const [user] = useAuthState(auth);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#f5f5f0] border-b border-[#5A5A40]/20 px-6 py-4">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="bg-[#5A5A40] p-2 rounded-xl text-white group-hover:scale-110 transition-transform">
-            <Scissors size={24} />
+    <header className="h-16 bg-panel border-b border-border flex items-center justify-between px-6 shrink-0 sticky top-0 z-50">
+      <div className="flex items-center gap-4">
+        <Link to="/" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 bg-primary rounded flex items-center justify-center text-white font-bold text-xl group-hover:scale-105 transition-transform">
+            KK
           </div>
-          <span className="font-serif text-2xl font-bold text-[#5A5A40]">Kutira-Kone</span>
+          <div>
+            <h1 className="text-lg font-bold leading-tight text-text-main">Kutira-Kone</h1>
+            <p className="text-[10px] text-text-muted uppercase tracking-wider font-bold">Fabric Exchange v2.4.0</p>
+          </div>
         </Link>
-
-        <nav className="flex items-center gap-6">
-          <Link to="/" className="text-[#5A5A40] font-medium hover:underline underline-offset-4">Browse</Link>
-          <Link to="/ai-ideas" className="text-[#5A5A40] font-medium hover:underline underline-offset-4">AI Projects</Link>
-          
-          {user ? (
-            <div className="flex items-center gap-4">
-              <Link to="/upload" className="bg-[#5A5A40] text-white px-4 py-2 rounded-full flex items-center gap-2 hover:bg-[#4A4A30] transition-colors">
-                <Plus size={18} />
-                <span>List Scrap</span>
-              </Link>
-              <div className="flex items-center gap-3 pl-4 border-l border-[#5A5A40]/20">
-                <img 
-                  src={user.photoURL || ''} 
-                  alt={user.displayName || 'Profile'} 
-                  className="w-8 h-8 rounded-full border border-[#5A5A40]/20"
-                />
-                <button 
-                  onClick={logout}
-                  className="text-[#5A5A40] hover:text-red-600 p-2"
-                  title="Logout"
-                >
-                  <LogOut size={18} />
-                </button>
-              </div>
-            </div>
-          ) : (
-            <button 
-              onClick={signInWithGoogle}
-              className="bg-[#5A5A40] text-white px-6 py-2 rounded-full font-medium hover:bg-[#4A4A30] transition-colors"
-            >
-              Sign In
-            </button>
-          )}
-        </nav>
       </div>
+
+      <nav className="flex items-center gap-4">
+        <Link to="/" className="text-sm font-semibold text-slate-700 hover:text-primary px-2 transition-colors">Browse</Link>
+        <Link to="/ai-ideas" className="text-sm font-semibold text-slate-700 hover:text-primary px-2 transition-colors">AI Projects</Link>
+        
+        {user ? (
+          <div className="flex items-center gap-3 border-l border-border pl-4">
+            <Link to="/upload" className="px-4 py-2 bg-primary text-white rounded text-sm font-semibold flex items-center gap-2 hover:bg-primary-hover transition-colors shadow-sm">
+              <Plus size={16} />
+              List Scrap
+            </Link>
+            <div className="flex items-center gap-2">
+              <img 
+                src={user.photoURL || ''} 
+                alt={user.displayName || 'Profile'} 
+                className="w-8 h-8 rounded-full border border-border"
+              />
+              <button 
+                onClick={logout}
+                className="text-slate-400 hover:text-red-600 p-1 transition-colors"
+                title="Logout"
+              >
+                <LogOut size={16} />
+              </button>
+            </div>
+          </div>
+        ) : (
+          <button 
+            onClick={signInWithGoogle}
+            className="px-6 py-2 bg-primary text-white rounded text-sm font-semibold hover:bg-primary-hover transition-colors shadow-sm"
+          >
+            Sign In
+          </button>
+        )}
+      </nav>
     </header>
   );
 }

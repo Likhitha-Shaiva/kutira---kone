@@ -19,9 +19,9 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-[#f5f5f0] text-[#1a1a1a] font-sans selection:bg-[#5A5A40]/30">
+      <div className="h-screen bg-surface text-text-main font-sans selection:bg-primary/20 flex flex-col overflow-hidden">
         <Header />
-        <main>
+        <main className="flex-1 overflow-y-auto">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/upload" element={
@@ -34,17 +34,21 @@ export default function App() {
           </Routes>
         </main>
         
-        <footer className="bg-[#f5f5f0] border-t border-[#5A5A40]/10 py-12 px-6 mt-20">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="flex items-center gap-2">
-              <div className="bg-[#5A5A40] p-1.5 rounded-lg text-white">
-                <Scissors size={18} />
-              </div>
-              <span className="font-serif text-xl font-bold text-[#5A5A40]">Kutira-Kone</span>
+        {/* Status Bar */}
+        <footer className="h-8 bg-status-bar text-slate-400 text-[10px] flex items-center justify-between px-4 shrink-0 transition-all">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Exchange Protocol: Active
             </div>
-            <p className="text-[#5A5A40]/60 text-sm">
-              © 2026 Kutira-Kone. Promoting circular fashion and reducing textile waste.
-            </p>
+            <div className="text-slate-500">|</div>
+            <div>Auth: <span className="text-slate-200">Authenticated</span></div>
+            <div className="text-slate-500">|</div>
+            <div>Sync: <span className="text-slate-200">Real-time</span></div>
+          </div>
+          <div className="flex items-center gap-3">
+            <span>KUTIRA OS v1.1.0</span>
+            <span className="uppercase tracking-tighter">System Time: {new Date().toLocaleTimeString()}</span>
           </div>
         </footer>
       </div>
